@@ -9,7 +9,7 @@ import os, sys
 from os.path import dirname, join, abspath
 sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 #from Data.Functions.reloadFunction import reload
-
+from Data.JSON import config
 @bot.event
 
 async def on_ready(): # On ready event
@@ -70,4 +70,4 @@ if __name__ == "__main__": # Running cogs
 #    await reload(self, ctx)
 
 
-bot.run('NjYxMzEyOTgxMjkxNzYxNzAz.Xgpl2g.X14frzqHAzfxKELnDF1qI28EOag')
+bot.run(config.token)

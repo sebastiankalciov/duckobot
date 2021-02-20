@@ -1,0 +1,10 @@
+{
+ "core": {
+   "no_command": "**Comand `{ctx}` doesn't exist! **❌"
+ }
+
+
+
+
+
+}

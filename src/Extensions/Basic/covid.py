@@ -1,5 +1,4 @@
-from io import BytesIO
-
+from io import BytesIO # Importing required libraries.
 import PIL
 import discord
 import matplotlib.pyplot as plt
@@ -15,73 +14,88 @@ class Covid(commands.Cog):
 
     @commands.command()
     async def covid(self, ctx, *args):
-        global populatie, tara
-        global steag
+
+        global population, country
+        global flag
         response = requests.get("https://corona.lmao.ninja/v2/countries")
         data = response.json()
-        for i in range(0, len(data) - 1):
-            if args[0].capitalize() in data[i].get('country'):
-                tara = data[i].get('country')
-                populatie = data[i].get('population')
-                steag = data[i].get('countryInfo').get('flag')
-                cazuriTotale = data[i].get('cases')
-                cazuriToday = data[i].get('todayCases')
-                deaths = data[i].get('deaths')
-                deathsToday = data[i].get('todayDeaths')
-                recovered = data[i].get('recovered')
-                recoveredToday = data[i].get('todayRecovered')
-                #tests = data[i].get('tests')
 
+        try:
+            for i in range(0, len(data) - 1): # For every country in that data
+                if args[0].capitalize() in data[i].get('country'): # If requested country is there
+
+                    country = data[i].get('country') # Get info
+                    population = data[i].get('population')
+                    flag = data[i].get('countryInfo').get('flag')
+                    totalCases = data[i].get('cases')
+                    todayCases = data[i].get('todayCases')
+                    deaths = data[i].get('deaths')
+                    deathsToday = data[i].get('todayDeaths')
+                    recovered = data[i].get('recovered')
+                    recoveredToday = data[i].get('todayRecovered')
+
+        except Exception as e: # If there's no such country return with a response.
+
+            embed = discord.Embed(color = 0xD63535, description = "> Please mention a valid country! ⚠️")
+            return await ctx.send(embed = embed)
 
         df = pd.read_csv('https://raw.githubusercontent.com/datasets/covid-19/master/data/countries-aggregated.csv',
                          parse_dates=['Date'])
+
         countries = [f'{args[0].capitalize()}']
+
         df = df[df['Country'].isin(countries)]
-        # Section 3 - Creating a Summary Column
         df['Cases'] = df[['Confirmed', 'Recovered']].sum(axis=1)
         df = df.pivot(index='Date', columns='Country', values='Cases')
         countries = list(df.columns)
+        if countries == []:
+            embed = discord.Embed(color = 0xD63535, description = "> Please mention a valid country! ⚠️")
+            return await ctx.send(embed = embed)
+
         covid = df.reset_index('Date')
         covid.set_index(['Date'], inplace=True)
         covid.columns = countries
-        # Section 5 - Calculating Rates per 100,000
-        populations = {f'{args[0].capitalize()}': populatie}
+
         percapita = covid.copy()
+
         for country in list(percapita.columns):
-            percapita[country] = percapita[country] / populations[country] * 100000
+            percapita[country] = percapita[country] / population * 100000
+            
         colors = {f'{args[0].capitalize()}': '#d64036'}
         plt.rcParams['axes.labelcolor'] = 'white'
         plt.rcParams['xtick.color'] = 'white'
         plt.rcParams['ytick.color'] = 'white'
-        # Section 7 - Creating the Visualization
-        plot = covid.plot(figsize=(10, 4), color=list(colors.values()), linewidth=4, legend=False, alpha=.95) #figsize=(14, 8), color=list(colors.values()), linewidth=3, legend=False
+
+        plot = covid.plot(figsize=(10, 4), color=list(colors.values()), linewidth=4, legend=False, alpha=.95)
         plot.yaxis.set_major_formatter(ticker.StrMethodFormatter('{x:,.0f}'))
         plot.set_rasterized(True)
-        #plot.grid(color='#000000') #2f3136 #
+
         plot.set_xlabel('Data', alpha=.95)
-        plot.set_ylabel('# numarul cazurilor', alpha=.95)
-        #plot.set_title(f'{args[0].capitalize()}')
-        plt.legend(['Cazuri'])
+        plot.set_ylabel('# number of cases', alpha=.95)
+
+        plt.legend(['Cases'])
         plt.savefig('covid.png', transparent = True, dpi = 1000)
+
         canvas = plt.get_current_fig_manager().canvas
         canvas.draw()
-        # aici se schimba din matplotlib in PIL
+
         pil_image = PIL.Image.frombytes('RGB', canvas.get_width_height(), canvas.tostring_rgb()).convert("RGBA")
         buffer = BytesIO()
         pil_image.save(buffer, format="PNG")
         buffer.seek(0)
 
-        embed = discord.Embed(color=0x333438) # 0xe64141
-        embed.set_author(name=f'Grafic SARS-Cov2 -> {args[0].capitalize()}', icon_url=steag)
-        embed.add_field(name='🧪 Cazuri totale:', value=f'**{cazuriTotale}** [**`+{cazuriToday}`** astazi]')
-        embed.add_field(name='☠ Decese:', value=f'**{deaths}** [**`+{deathsToday}`** astazi]')
-        embed.add_field(name='🩹 Vindecati:', value=f'**{recovered}** [**`+{recoveredToday}`** astazi]')
+        embed = discord.Embed(color=0xD63535) # Creating the embed with the data.
+        embed.set_author(name=f'Graph SARS-Cov2 -> {args[0].capitalize()}', icon_url=flag)
+        embed.add_field(name='🧪 Total cases:', value=f'{totalCases} [**`+{todayCases}`** today]')
+        embed.add_field(name='☠ Total deaths:', value=f'{deaths} [**`+{deathsToday}`** today]')
+        embed.add_field(name='🩹 Healed:', value=f'{recovered} [**`+{recoveredToday}`** today]')
+
         embed.set_image(
             url="attachment://covid.png" #
         )
 
-        image = discord.File('./covid.png', filename="covid.png") #buffer
-        await ctx.send(
+        image = discord.File('./covid.png', filename="covid.png") # Graph
+        await ctx.send( # Sending the embed with the graph.
             embed=embed,
             file=image
         )

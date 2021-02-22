@@ -15,12 +15,24 @@ class ExecData(commands.Cog):
         await ctx.send(f"https://cdn.discordapp.com/avatars/{self.bot.user.id}/{self.bot.user.avatar}")
 
     @commands.command()
-    async def getdata(self, ctx): # A command to get raw data.
+    async def getdata(self, ctx, *args): # A command to get raw data.
 
         DataManager.setData(self.bot)
         rawdata = DataManager.getRawData()
-        print(self.bot.users)
-        await ctx.send(f"""```{rawdata} ```""")
+        if args == ():
+            await ctx.send(f"""```{rawdata} ```""")
+        elif args[0].lower() == "avatar".lower():
+            await ctx.send(rawdata["botAvatar"])
+        elif args[0].lower() == "guilds".lower():
+            await ctx.send(rawdata["guildSize"])
+        else:
+
+            embed = discord.Embed(color=0xd14242)
+            embed.set_author(name = "Available data options", icon_url= f"https://cdn.discordapp.com/avatars/{self.bot.user.id}/{self.bot.user.avatar}")
+            embed.add_field(name="Avatar",value= "> Get the bot's avatar.")
+            embed.add_field(name="Guilds",value= "> Get the number of guilds.")
+
+            await ctx.send(embed = embed)
 
 
 def setup(bot):

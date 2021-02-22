@@ -3,7 +3,9 @@ from discord.ext import commands
 import discord
 import json
 import platform
-bot = commands.Bot(command_prefix='-') # Initiating a bot with a custom prefix.
+import random
+from termcolor import colored
+bot = commands.Bot(command_prefix='-', intents = discord.Intents.all()) # Initiating the bot with a custom prefix and intents enabled.
 bot.remove_command('help') # Removing the help command to add a custom one.
 
 # import os, sys
@@ -17,8 +19,9 @@ token = data["token"]
 @bot.event
 async def on_ready(): # On ready event
 
-    print(f'Ready <{bot.user.name}>')
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="fututz pe mata ce te uiti la mine"))
+    print(f'Ready <{colored(bot.user.name, "red")}>')
+    games = ["Venom: Let There Be Carnage", "Godzilla vs. Kong"]
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=random.choice(games)))
 
 
 @bot.event

@@ -9,7 +9,7 @@ data = json.load(open('../data.json', "r"))
 class DataManager():
     """ Data manager for duckobot-site API """
 
-    def resetData(client):
+    def setData(client):
         with open('../data.json', "r+") as f:
             dataFile = json.load(f)
             dataFile["name"] = str(client.user.name)

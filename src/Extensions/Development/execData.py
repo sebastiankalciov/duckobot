@@ -1,5 +1,4 @@
 import discord
-import random
 from discord.ext import commands
 from Data.Api.dataManager import DataManager
 
@@ -9,12 +8,11 @@ class ExecData(commands.Cog):
 
 
     @commands.command()
-    async def execdata(self, ctx):
+    async def testdata(self, ctx):
 
         DataManager.resetData(self.bot)
         schema = DataManager.getRawData()
-        print(self.bot.users)
-        await ctx.send("ce fa ma")
+        await ctx.send(f"https://cdn.discordapp.com/avatars/{self.bot.user.id}/{self.bot.user.avatar}")
 
     @commands.command()
     async def getdata(self, ctx):

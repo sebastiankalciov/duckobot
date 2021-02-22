@@ -15,6 +15,7 @@ class DataManager():
             dataFile["name"] = str(client.user.name)
             dataFile["tag"] = str(client.user.discriminator)
             dataFile["guildSize"] = len(client.guilds)
+            dataFile["botAvatar"] = f"https://cdn.discordapp.com/avatars/{client.user.id}/{client.user.avatar}"
             f.seek(0)
             f.write(json.dumps(dataFile, indent = 4))
 

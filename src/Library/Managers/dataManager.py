@@ -11,6 +11,7 @@ class DataManager():
 
     def setData(client):
         with open('../data.json', "r+") as f:
+            
             dataFile = json.load(f)
             dataFile["name"] = str(client.user.name)
             dataFile["tag"] = str(client.user.discriminator)

@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from Data.Api.dataManager import DataManager
+from Library.Managers.dataManager import DataManager
 
 class ExecData(commands.Cog):
     def __init__(self, bot):
@@ -21,10 +21,13 @@ class ExecData(commands.Cog):
         rawdata = DataManager.getRawData()
         if args == ():
             await ctx.send(f"""```{rawdata} ```""")
+
         elif args[0].lower() == "avatar".lower():
             await ctx.send(rawdata["botAvatar"])
+
         elif args[0].lower() == "guilds".lower():
             await ctx.send(rawdata["guildSize"])
+            
         else:
 
             embed = discord.Embed(color=0xd14242)

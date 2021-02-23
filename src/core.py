@@ -12,7 +12,7 @@ bot.remove_command('help') # Removing the help command to add a custom one.
 # from os.path import dirname, join, abspath
 # sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 
-data = json.load(open('./Data/JSON/config.json', "r"))
+data = json.load(open('./Library/JSON/config.json', "r"))
 token = data["token"]
 
 
@@ -44,7 +44,7 @@ async def on_command_error(ctx, error): # Error handler
 
 
 if __name__ == "__main__": # Running cogs
-    possibleCommands = glob.glob('./Extensions/**/*.py')
+    possibleCommands = glob.glob('./Commands/**/*.py')
 
     for file in possibleCommands:
         try:
@@ -69,7 +69,7 @@ if __name__ == "__main__": # Running cogs
 @bot.command()
 async def reload(self, ctx): # Reload command
 
-    possibleCommands = glob.glob('./Extensions/**/*.py')
+    possibleCommands = glob.glob('./Commands/**/*.py')
     try:
         for file in possibleCommands:
 

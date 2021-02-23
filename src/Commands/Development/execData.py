@@ -3,9 +3,9 @@ from discord.ext import commands
 from Library.Managers.dataManager import DataManager
 
 class ExecData(commands.Cog):
+
     def __init__(self, bot):
         self.bot = bot
-
 
     @commands.command()
     async def testdata(self, ctx): # A test command.
@@ -28,7 +28,7 @@ class ExecData(commands.Cog):
         elif args[0].lower() == "guilds".lower():
             await ctx.send(rawdata["guildSize"])
             
-        else:
+        else: # Displays all available options that can be get from <data.json>
 
             embed = discord.Embed(color=0xd14242)
             embed.set_author(name = "Available data options", icon_url= f"https://cdn.discordapp.com/avatars/{self.bot.user.id}/{self.bot.user.avatar}")

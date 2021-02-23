@@ -1,15 +1,17 @@
-# With this class we send data from bot to a file, and from that file we send to the website.
-# facem ducktheduck/duckobot in github pages si in main folder facem un fisier data.json
-# apoi in ducktheduck/duckobot-site in fisierele py... luam din ducktheduck.github.io/duckobot/data.json datele
-# pentru ca in duckobot modificam datele de fiecare data cand rulam botu iar in site luam date noi fiindca is actualizate
+# With this manager we send data from bot to a file, and from that file we send to the website.
+
 import json
 
-data = json.load(open('../data.json', "r"))
+data = json.load(open('../data.json', "r")) # Loading the data from <data.json>
 
 class DataManager():
+
     """ Data manager for duckobot-site API """
 
     def setData(client):
+
+        """ Update <data.json> with real-time informations. """
+
         with open('../data.json', "r+") as f:
             
             dataFile = json.load(f)
@@ -21,9 +23,14 @@ class DataManager():
             f.write(json.dumps(dataFile, indent = 4))
 
     def getRawData():
+
+        """Get raw data from <data.json>"""
         data = json.load(open('../data.json', "r"))
         return data
-    def modifyData(option):
+
+    def modifyData(option, value):
+
+        """ Change the value of an option from <data.json> """
         pass
 
 

@@ -7,7 +7,7 @@ class languageManager():
     def getMessage(self,section,fraza):
         #self.section = default_cores[0]
 
-        with open(f'Data/Text/{self.lang}.json', 'r') as j: #Deschide fisierul lang.json in modul read doar pentru a fi citit.
+        with open(f'Config/Text/{self.lang}.json', 'r') as j: #Deschide fisierul lang.json in modul read doar pentru a fi citit.
 
             json_data = json.load(j)
             msg = json_data[f'{section}'][f'{fraza}']
@@ -18,7 +18,7 @@ class languageManager():
 
         new_end_at_section = ", " + json.dumps(msg) + "\n"
         print(new_end_at_section)
-        with open(f'Data/Text/{self.lang}.json', 'w') as j:
+        with open(f'Config/Text/{self.lang}.json', 'w') as j:
             #json_data = json.load(j)
             index = j.tell()
             print(index)

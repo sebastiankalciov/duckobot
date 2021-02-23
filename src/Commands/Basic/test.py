@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from Library.Functions.languageManager import Language
+from Library.Managers.languageManager import Language
 class Test(commands.Cog):
     def __init__(self, bot):
         self.bot = bot

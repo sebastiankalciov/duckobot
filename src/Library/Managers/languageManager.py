@@ -24,7 +24,7 @@ class languageManager():
 
             Returns the msg assigned to ``no_arg`` or ``None`` if not found.
         """
-        
+
         data = json.load(open(f'./Library/Config/Text/{self.lang}.json', "r", encoding="utf-8", errors="replace"))
         msg = data.get(section).get(prop)
         if msg == None:
@@ -42,8 +42,6 @@ class languageManager():
             print(index)
             j.seek(index)
             j.write(new_end_at_section)
-            #print(json_data)
-            #print(json_data['core2f2f'])
 
 
 

@@ -6,11 +6,11 @@ data = json.load(open('../data.json', "r")) # Loading the data from <data.json>
 
 class DataManager():
 
-    """ Data manager for duckobot-site API """
+    """## Data manager for duckobot-site API """
 
     def setData(client):
 
-        """ Update <data.json> with real-time informations. """
+        """Update <data.json> with real-time informations. """
 
         with open('../data.json', "r+") as f:
             
@@ -30,7 +30,7 @@ class DataManager():
 
     def modifyData(option, value):
 
-        """ Change the value of an option from <data.json> """
+        """Change the value of an option from <data.json> """
         pass
 
 

@@ -6,7 +6,25 @@ import platform
 from Library.Managers.LanguageManager import Language
 
 async def ReloadCommand(self, ctx, bot):
-    """## Reload command of duckobot\nMIT License"""
+    """## Reload command of duckobot
+
+    Reloads a command.
+
+    Parameters
+    ----------
+
+    self:  :class: :parameter:
+            Parameter
+
+    ctx:   :class: :variable:
+            Parameter
+
+    bot:   :class: :variable:
+            Client
+    
+   
+    """
+
     possibleCommands = glob.glob('./Commands/**/*.py')
     try:
         for file in possibleCommands:

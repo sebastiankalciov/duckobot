@@ -7,12 +7,12 @@ import random
 from termcolor import colored
 bot = commands.Bot(command_prefix='-', intents = discord.Intents.all()) # Initiating the bot with a custom prefix and intents enabled.
 bot.remove_command('help') # Removing the help command to add a custom one.
-
+from Library.Util.ReloadCommand import ReloadCommand
 # import os, sys
 # from os.path import dirname, join, abspath
 # sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 
-data = json.load(open('./Library/JSON/config.json', "r"))
+data = json.load(open('./Library/Config/config.json', "r"))
 token = data["token"]
 
 
@@ -68,21 +68,7 @@ if __name__ == "__main__": # Running cogs
 
 @bot.command()
 async def reload(self, ctx): # Reload command
-
-    possibleCommands = glob.glob('./Commands/**/*.py')
-    try:
-        for file in possibleCommands:
-
-            if file[2:].replace('\\', '.')[:-3].split(".")[2].lower() == ctx.lower():
-
-                bot.unload_extension(file[2:].replace('\\', '.')[:-3])
-                bot.load_extension(file[2:].replace('\\', '.')[:-3])
-
-                embed = discord.Embed(description=f'> Command `{ctx}` reloaded successfully! ✅', color=0x5fab38)
-                return await self.send(embed = embed)
-
-    except Exception as e:
-        return await self.send(embed = discord.Embed(description=f'> Command `{ctx}` does not exist! ❌', color=0xd14242))
+    await ReloadCommand(self, ctx, bot)
 
 
 bot.run(token)

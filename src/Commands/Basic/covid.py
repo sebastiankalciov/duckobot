@@ -85,7 +85,7 @@ class Covid(commands.Cog):
         buffer.seek(0)
 
         embed = discord.Embed(color=0xD63535) # Creating the embed with the data.
-        embed.set_author(name=f'Graph SARS-Cov2 -> {args[0].capitalize()}', icon_url=flag)
+        embed.set_author(name=f'Graph Covid-19 -> {args[0].capitalize()}', icon_url=flag)
         embed.add_field(name='🧪 Total cases:', value=f'{totalCases} [**`+{todayCases}`** today]')
         embed.add_field(name='☠ Total deaths:', value=f'{deaths} [**`+{deathsToday}`** today]')
         embed.add_field(name='🩹 Healed:', value=f'{recovered} [**`+{recoveredToday}`** today]')
@@ -94,7 +94,7 @@ class Covid(commands.Cog):
             url="attachment://covid.png" #
         )
 
-        image = discord.File('./covid.png', filename="covid.png") # Graph
+        image = discord.File('./Library/Images/covid.png', filename="covid.png") # Graph
         await ctx.send( # Sending the embed with the graph.
             embed=embed,
             file=image

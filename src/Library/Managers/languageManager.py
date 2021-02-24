@@ -1,20 +1,16 @@
 import json
 default_cores = {'core', 'covid'}
+
 class languageManager():
     def __init__(self, lang):
         self.lang = lang
 
-    def getMessage(self,section,fraza):
-        #self.section = default_cores[0]
-
-        with open(f'Config/Text/{self.lang}.json', 'r') as j: #Deschide fisierul lang.json in modul read doar pentru a fi citit.
-
-            json_data = json.load(j)
-            msg = json_data[f'{section}'][f'{fraza}']
+    def getMessage(self,section,prop):
+        data = json.load(open(f'./Library/Config/Text/{self.lang}.json', "r"))
+        msg = data.get(section).get(prop)
         return msg
 
     def addMessage(self, section, msg):
-        #self.section = default_cores[0]
 
         new_end_at_section = ", " + json.dumps(msg) + "\n"
         print(new_end_at_section)
@@ -29,4 +25,4 @@ class languageManager():
 
 
 
-Language = languageManager('ro')
+Language = languageManager('en')

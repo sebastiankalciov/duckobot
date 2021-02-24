@@ -10,6 +10,7 @@ class Createprofile(commands.Cog):
 
     @commands.command()
     async def createprofile(self, ctx, *args):
+
         if args == ():
             return await ctx.send(Language.getMessage("CreateProfile", "no_arg"))
 

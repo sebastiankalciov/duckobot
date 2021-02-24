@@ -1,11 +1,23 @@
 {
 
-  "Core":{
+  "Core": {
+
     "test":"test"
+
   },
- "CreateProfile":{
+
+ "CreateProfile": {
+
    "no_arg":"You must specify your origin country."
- }
+
+ },
+
+ "ReloadCommand": {
+
+  "reloaded_successfully":"> Command `{ctx}` reloaded successfully! ✅",
+  "reloaded_unsuccessfully":"> Command `{ctx}` does not exist! ❌"
+
+}
 
 
 

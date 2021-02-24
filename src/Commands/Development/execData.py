@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from Library.Managers.dataManager import DataManager # Importing Data Manager from Library directory.
+from Library.Managers.DataManager import DataManager # Importing Data Manager from Library directory.
 
 class ExecData(commands.Cog):
 

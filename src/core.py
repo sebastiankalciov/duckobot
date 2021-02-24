@@ -7,7 +7,7 @@ import random
 from termcolor import colored
 bot = commands.Bot(command_prefix='-', intents = discord.Intents.all()) # Initiating the bot with a custom prefix and intents enabled.
 bot.remove_command('help') # Removing the help command to add a custom one.
-from Library.Util.ReloadCommand import ReloadCommand
+from Library.Util.ReloadCommand import ReloadCommand # Importing Reload command from Utils
 # import os, sys
 # from os.path import dirname, join, abspath
 # sys.path.insert(0, abspath(join(dirname(__file__), '..')))

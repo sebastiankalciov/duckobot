@@ -22,7 +22,7 @@ class languageManager():
         -------
         `Language.getMessage(section, prop)`
 
-            Returns the msg assigned to ``no_arg`` or ``None`` if not found.
+            Returns the msg assigned to ``prop`` or ``None`` if not found.
         """
 
         data = json.load(open(f'./Library/Config/Text/{self.lang}.json', "r", encoding="utf-8", errors="replace"))

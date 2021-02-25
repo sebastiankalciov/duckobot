@@ -7,6 +7,7 @@ from Library.Util.EmbedGenerator import embf
 from Library.Util.GetConfigData import getData
 
 OWNER_ID = getData("owner_id")
+print(OWNER_ID)
 
 class Cmd(commands.Cog):
     def __init__(self, bot):
@@ -17,8 +18,7 @@ class Cmd(commands.Cog):
 
         if ctx.author.id == OWNER_ID:
 
-            await ctx.send(embed = embf(Language.getMessage("Cmd", "no_perm")))
-            return
+            return await ctx.send(embed = embf(Language.getMessage("Cmd", "no_perm")))
 
         posibileComenzi = glob.glob('./Commands/**/*.py')
 

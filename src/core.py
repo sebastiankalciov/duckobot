@@ -8,12 +8,13 @@ from termcolor import colored
 bot = commands.Bot(command_prefix='-', intents = discord.Intents.all()) # Initiating the bot with a custom prefix and intents enabled.
 bot.remove_command('help') # Removing the help command to add a custom one.
 from Library.Util.ReloadCommand import ReloadCommand # Importing Reload command from Utils
+from Library.Util.GetConfigData import getData
 # import os, sys
 # from os.path import dirname, join, abspath
 # sys.path.insert(0, abspath(join(dirname(__file__), '..')))
+#data = json.load(open('./Library/Config/config.json', "r"))
 
-data = json.load(open('./Library/Config/config.json', "r"))
-token = data["token"]
+token = getData("token")
 
 
 @bot.event

@@ -14,12 +14,12 @@
 
  "ReloadCommand": {
 
-  "reloaded_successfully":"> Command `{ctx}` reloaded successfully! ✅",
-  "reloaded_unsuccessfully":"> Command `{ctx}` does not exist! ❌"
+  "reloaded_successfully":"> Command `{ctx}` reloaded successfully! {{emoji}}",
+  "reloaded_unsuccessfully":"> Command `{ctx}` does not exist! {{emoji}}"
 
 },
   "Cmd":{
-    "no_perm":"> You do not have the right permission to use this command! ❌"
+    "no_perm":"> You do not have the right permission to use this command! {{emoji}}"
   }
 
 

@@ -9,6 +9,10 @@ bot = commands.Bot(command_prefix='-', intents = discord.Intents.all()) # Initia
 bot.remove_command('help') # Removing the help command to add a custom one.
 from Library.Util.ReloadCommand import ReloadCommand # Importing Reload command from Utils
 from Library.Util.GetConfigData import getData
+from Library.Managers.LanguageManager import Language
+
+APPROVED_EMOJI = f"<:approved:{getData('emotes', 'approved')}>"
+REJECTED_EMOJI = f"<:rejected:{getData('emotes', 'rejected')}>"
 # import os, sys
 # from os.path import dirname, join, abspath
 # sys.path.insert(0, abspath(join(dirname(__file__), '..')))
@@ -69,7 +73,9 @@ if __name__ == "__main__": # Running cogs
 
 @bot.command()
 async def reload(self, ctx): # Reload command
-    await ReloadCommand(self, ctx, bot)
+    success_msg = Language.getMessage('ReloadCommand', "reloaded_successfully").replace("{ctx}", ctx).replace("{{emoji}}", APPROVED_EMOJI)
+    unsuccess_msg = Language.getMessage('ReloadCommand', "reloaded_unsuccessfully").replace("{ctx}", ctx).replace("{{emoji}}", REJECTED_EMOJI)
+    await ReloadCommand(self, ctx, bot, "Commands", success_msg, unsuccess_msg)
 
 
 bot.run(token)

@@ -1,13 +1,7 @@
-import glob # Importing required libraries and modules.
-from discord.ext import commands
-import discord
-import json
-import platform
-from Library.Managers.LanguageManager import Language
-from Library.Util.GetConfigData import getData
-APPROVED_EMOJI = f"<:approved:{getData('emotes', 'approved')}>"
-REJECTED_EMOJI = f"<:rejected:{getData('emotes', 'rejected')}>"
-async def ReloadCommand(self, ctx, bot):
+import glob # Importing glob to get the commands from folders
+import discord # Importing discord library to send messages to user.
+
+async def ReloadCommand(self, ctx, bot, dir_name, success_msg, unsuccess_msg):
     """## Reload command of duckobot
 
     Reloads a command.
@@ -15,29 +9,50 @@ async def ReloadCommand(self, ctx, bot):
     Parameters
     ----------
 
-    self:  :class: :parameter:
-            Parameter
+        self: :class: :parameter:
+              Parameter.
 
-    ctx:   :class: :variable:
-            Parameter
+        ctx: :class: :variable:
+             Parameter.
 
-    bot:   :class: :variable:
-            Client
+        bot: :class: :variable:
+             Client.
+
+        dir_name: :string:
+                  The folder where commands are.  
+
+        success_msg: :string:
+                     The message that will be sent if the command was reloaded successfully.
+
+        unsuccess_msg: :string:
+                       The message that will be sent if the command was reloaded unsuccessfully.
     
-   
     """
 
-    possibleCommands = glob.glob('./Commands/**/*.py')
+    all_commands = glob.glob(f'./{dir_name}/**/*.py') # A list with all .py files in dir_name.
+
     try:
-        for file in possibleCommands:
 
-            if file[2:].replace('\\', '.')[:-3].split(".")[2].lower() == ctx.lower():
+        for file in all_commands: # For every file in the list
+            if file[2:].replace('\\', '.')[:-3].split(".")[2].lower() == ctx.lower(): # If the current file is the same as required file
 
-                bot.unload_extension(file[2:].replace('\\', '.')[:-3])
-                bot.load_extension(file[2:].replace('\\', '.')[:-3])
+                                                        
+                bot.unload_extension(file[2:].replace('\\', '.')[:-3]) # Unload the command
+                bot.load_extension(file[2:].replace('\\', '.')[:-3]) # Load the command
 
-                embed = discord.Embed(description = Language.getMessage('ReloadCommand', "reloaded_successfully").replace("{ctx}", ctx).replace("{{emoji}}", APPROVED_EMOJI), color=0x5fab38)
-                return await self.send(embed = embed)
+                embed = discord.Embed(description = success_msg, color=0x5fab38) # Create an embed
+                return await self.send(embed = embed) # Send the embed.
 
-    except Exception as e:
-        return await self.send(embed = discord.Embed(description= Language.getMessage('ReloadCommand', "reloaded_unsuccessfully").replace("{ctx}", ctx).replace("{{emoji}}", REJECTED_EMOJI), color=0xd14242))
+    except Exception as e: # If there is a problem with a file
+        return await self.send(embed = unsuccess_msg, color=0xd14242) # Break the operation and return a message.
+
+
+## DICTIONARY ##
+
+        # << file[2:].replace('\\', '.')[:-3].split(".")[2].lower() >> --> File's name lower cased. (eg. help)
+        # << ctx.lower() >> --> Input lower cased. (eg. help)
+
+## DICTIONARY ##
+
+
+

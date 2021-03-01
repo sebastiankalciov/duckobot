@@ -2,8 +2,9 @@ import discord
 from discord.ext import commands
 from Library.Managers.LanguageManager import Language
 from Library.Util.GetConfigData import getData
-APPROVED_EMOJI = f"<:approved:{getData('emotes', 'approved')}>"
-REJECTED_EMOJI = f"<:rejected:{getData('emotes', 'rejected')}>"
+
+APPROVED_EMOJI = f"<:approved:{getData('emotes', 'approved')}>" # Emote One
+REJECTED_EMOJI = f"<:rejected:{getData('emotes', 'rejected')}>" # Emote Two
 
 class Createprofile(commands.Cog):
     def __init__(self, bot):
@@ -15,7 +16,8 @@ class Createprofile(commands.Cog):
 
         if args == ():
             return await ctx.send(Language.getMessage("CreateProfile", "no_arg"))
-
+            
+ 
 
 def setup(bot):
     bot.add_cog(Createprofile(bot))

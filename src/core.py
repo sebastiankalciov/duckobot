@@ -73,6 +73,7 @@ if __name__ == "__main__": # Running cogs
 
 @bot.command()
 async def reload(self, ctx): # Reload command
+    
     success_msg = Language.getMessage('ReloadCommand', "reloaded_successfully").replace("{ctx}", ctx).replace("{{emoji}}", APPROVED_EMOJI)
     unsuccess_msg = Language.getMessage('ReloadCommand', "reloaded_unsuccessfully").replace("{ctx}", ctx).replace("{{emoji}}", REJECTED_EMOJI)
     await ReloadCommand(self, ctx, bot, "Commands", success_msg, unsuccess_msg)

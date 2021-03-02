@@ -8,7 +8,7 @@
 
  "CreateProfile": {
 
-   "no_arg":"You must specify your origin country."
+   "no_arg":"> You must specify your origin country! {{emoji}}"
 
  },
 

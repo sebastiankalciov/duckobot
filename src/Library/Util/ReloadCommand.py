@@ -2,7 +2,9 @@ import glob # Importing glob to get the commands from folders
 import discord # Importing discord library to send messages to user.
 
 async def ReloadCommand(self, ctx, bot, dir_name, success_msg, unsuccess_msg):
-    """## Reload command of duckobot
+        
+    """
+    ## Reload command of duckobot
 
     Reloads a command.
 
@@ -34,7 +36,7 @@ async def ReloadCommand(self, ctx, bot, dir_name, success_msg, unsuccess_msg):
     try:
 
         for file in all_commands: # For every file in the list
-            if file[2:].replace('\\', '.')[:-3].split(".")[2].lower() == ctx.lower(): # If the current file is the same as required file
+            if file[2:].replace('\\', '.')[:-3].split(".")[2].lower() == ctx.lower(): # If the current file's name is as the same as required file
 
                                                         
                 bot.unload_extension(file[2:].replace('\\', '.')[:-3]) # Unload the command
@@ -47,12 +49,12 @@ async def ReloadCommand(self, ctx, bot, dir_name, success_msg, unsuccess_msg):
         return await self.send(embed = unsuccess_msg, color=0xd14242) # Break the operation and return a message.
 
 
-## DICTIONARY ##
+# Docs #
 
         # << file[2:].replace('\\', '.')[:-3].split(".")[2].lower() >> --> File's name lower cased. (eg. help)
         # << ctx.lower() >> --> Input lower cased. (eg. help)
 
-## DICTIONARY ##
+# Docs #
 
 
 

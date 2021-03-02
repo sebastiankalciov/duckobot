@@ -3,22 +3,34 @@ import asyncio
 import asyncpg
 
 class DBManager ():
-    """ DataBase manager for duckobot"""
-    async def createDB():
 
-        credentials = {"user": "USERNAME", "duckobot-id": "ID", "database": "DATABASE", "host": "127.0.0.1"}
-        db = await asyncpg.create_pool(**credentials)
+    """## DataBase manager of duckobot"""
 
-        await db.execute("CREATE TABLE IF NOT EXISTS users(id bigint PRIMARY KEY, data text);")
-
-        print(db)
-
-    async def getData():
+    async def addData(): # Add a new *table*
 
         pass
 
-    def setData():
+    async def getData(): # Get a whole table.
+
         pass
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(DBManager().createDB())
+
+    class UsersManager():
+        """
+        ## DataBase Manager of `duckobot's` users db.
+        """
+
+        def addUser(param1, param2, param3): # Add a new user in table.
+            pass
+
+        def getData(user, option): # Get data of an existing user.
+            pass
+
+        def setData(user, option, param): # Update data with real time information or with specifiec info.
+            pass
+
+
+
+
+
+

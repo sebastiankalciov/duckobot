@@ -8,16 +8,25 @@ class DBManager ():
     """## DataBase manager of duckobot"""
 
     def getRawData():
+        """## Get raw data from <db.json>"""
         return data
 
 
-    async def addData(): # Add a new *table*
+    def addData(): # Add a new *table*
+        """
+        ## Add a new table to <db.json>
+        """
 
         pass
 
-    async def getData(): # Get a whole table.
+    def getData(table): # Get a whole table.
+        """
+        ## Get a whole table of data from <db.json>
+        """
 
-        pass
+        if data.get(table) == None:
+            return "None"
+        return data.get(table)
 
 
     class UsersManager():

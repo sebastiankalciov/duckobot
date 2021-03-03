@@ -1,10 +1,15 @@
 
 import asyncio
 import asyncpg
+import json
+data = json.load(open(f'./Library/Database/db.json', "r", encoding="utf-8", errors="replace"))
 
 class DBManager ():
-
     """## DataBase manager of duckobot"""
+
+    def getRawData():
+        return data
+
 
     async def addData(): # Add a new *table*
 

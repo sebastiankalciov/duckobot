@@ -1,6 +1,5 @@
+from inspect import Attribute
 import discord
-import asyncio
-import asyncpg
 from discord.ext import commands
 # Importing Managers and util functions from duckobot's own library
 from Library.Managers.LanguageManager import Language
@@ -17,23 +16,22 @@ usersDB = DBManager.UsersManager
 rawData = DBManager.getRawData()
 
 
-class Createprofile(commands.Cog):
+class GetSpotifyData(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
 
     @commands.command()
-    async def createprofile(self, ctx, *args):
-
-        
+    async def getspotifydata(self, ctx, *args):
+        embed = discord.Embed(description = f"""Artist: {ctx.author.activities[0].artist}\nNume: {ctx.author.activities[0].title}\nAlbum: {ctx.author.activities[0].album}\nCand o inceput sa asculte: {ctx.author.activities[0].created_at}""")
+    
+        #await ctx.send(f"""{ctx.author.activities[0].artist}\n{ctx.author.activities[0].album}\n{ctx.author.activities[0].created_at}""") 
+        await ctx.send(embed = embed)                 
         pass
-        
-        #if args == ():
-            #return await ctx.send(embed = embf(Language.getMessage("CreateProfile", "no_arg").replace("{{emoji}}", REJECTED_EMOJI)))
 
         
             
  
 
 def setup(bot):
-    bot.add_cog(Createprofile(bot))
+    bot.add_cog(GetSpotifyData(bot))

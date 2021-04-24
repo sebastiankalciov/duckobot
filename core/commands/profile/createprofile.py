@@ -9,6 +9,7 @@ from Library.Util.GetConfigData import getData
 from Library.Util.EmbedGenerator import embf
 from Library.Util.GenerateID import generateID
 #
+# am facut o functie sa genereze un id, si creezi un profil, il baga in db
 APPROVED_EMOJI = f"<:approved:{getData('emotes', 'approved')}>" # Emote One
 REJECTED_EMOJI = f"<:rejected:{getData('emotes', 'rejected')}>" # Emote Two
 db = DBManager

@@ -7,7 +7,7 @@ def getData(option1, option2 = None):
 
     """
 
-    data = json.load(open('./Library/Config/config.json', "r"))
+    data = json.load(open('../../client/config/config.json', "r"))
     if option2 == None:
         req_option = data.get(option1)
 

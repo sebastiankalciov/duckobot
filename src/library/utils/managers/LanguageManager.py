@@ -1,5 +1,4 @@
 import json
-default_cores = {'core', 'covid'}
 
 class languageManager():
     """## Language Manager of duckobot\n MIT License"""

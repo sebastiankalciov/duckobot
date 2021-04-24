@@ -7,9 +7,9 @@ import random
 from termcolor import colored
 bot = commands.Bot(command_prefix='-', intents = discord.Intents.all()) # Initiating the bot with a custom prefix and intents enabled.
 bot.remove_command('help') # Removing the help command to add a custom one.
-from Library.Util.ReloadCommand import ReloadCommand # Importing Reload command from Utils
-from Library.Util.GetConfigData import getData
-from Library.Managers.LanguageManager import Language
+from library.utils.functions.ReloadCommand import ReloadCommand # Importing Reload command from Utils
+from library.utils.functions.GetConfigData import getData
+from library.utils.managers.LanguageManager import Language
 
 APPROVED_EMOJI = f"<:approved:{getData('emotes', 'approved')}>"
 REJECTED_EMOJI = f"<:rejected:{getData('emotes', 'rejected')}>"
@@ -49,7 +49,7 @@ async def on_command_error(ctx, error): # Error handler
 
 
 if __name__ == "__main__": # Running cogs
-    possibleCommands = glob.glob('./Commands/**/*.py')
+    possibleCommands = glob.glob('../core/commands/**/*.py')
 
     for file in possibleCommands:
         try:
